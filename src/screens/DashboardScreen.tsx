@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import ListComponent from '../components/ListComponent';
 import ApiService from '../services/api.service';
+import ToDoType from '../types/ToDoType';
 
-interface ToDoObject {
-    completed: boolean
-    id: number
-    title: string
-    userId: number
-}
 const DashboardScreen: React.FC = ()=> {
 
-    const [data, setData] =useState<ToDoObject[]>([])
+    const [data, setData] =useState<ToDoType[]>([])
 
     const fetchData = async() =>{
-        const todos = await ApiService.getAllTodos() 
-          setData(todos.data)
+        const response = await ApiService.getAllTodos() 
+        setData(response.data)
     }
 
     useEffect(() => {
@@ -23,11 +19,7 @@ const DashboardScreen: React.FC = ()=> {
     return <div> 
                 <h1>dashboard screen</h1>
                 <p>Fetched data:</p>
-                <ul>
-                    {data.map(e=>{
-                        return <li key={e.id}>{e.title}</li>
-                    })}
-                </ul>
+                <ListComponent data={data} />
             </div>
 
 }

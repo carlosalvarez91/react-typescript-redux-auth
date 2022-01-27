@@ -3,7 +3,7 @@ import { SET_ERRORS, LOADING_UI, CLEAR_ERRORS, SET_UNAUTHENTICATED, SET_AUTHENTI
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
-export const loginUser = (userData: any, navigate: any) => (dispatch: any) => {
+export const loginUser = (userData: any) => (dispatch: any) => {
         dispatch({ type: LOADING_UI })
     
         const {email, password} = userData;
@@ -11,21 +11,26 @@ export const loginUser = (userData: any, navigate: any) => (dispatch: any) => {
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential:any) => {
 
+            console.log(userCredential)
+
             const token = userCredential.user.accessToken;
+            localStorage.setItem('token', token);
+
             dispatch({
                 type: SET_AUTHENTICATED,
                 payload: auth.currentUser
             });
-            localStorage.setItem('token', token);
+            
             dispatch({
                 type: CLEAR_ERRORS
             });
         })
         .catch((error) => {
-          dispatch({
-            type: SET_ERRORS,
-            payload: error.message
-            });
+            console.error(error)
+            dispatch({
+                type: SET_ERRORS,
+                payload: error.message
+                });
         });
   
 }

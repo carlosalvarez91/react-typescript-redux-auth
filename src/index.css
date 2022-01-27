@@ -17,3 +17,7 @@
 .ant-layout-has-sider{
   height: 100%;
 }
+
+.ant-form{
+  margin-top: 5rem;
+}

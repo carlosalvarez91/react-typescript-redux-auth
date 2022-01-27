@@ -7,16 +7,16 @@ const initialState = {
 }
 
 export default function (state = initialState, action:any) {
-
  switch (action.type) {
     case SET_AUTHENTICATED:
         return {
+            ...state,
             authenticated: true,
             loading:false,
             credentials: action.payload
         };
     case SET_UNAUTHENTICATED:
-        return initialState;
+        return initialState
 
     default:
         return state;

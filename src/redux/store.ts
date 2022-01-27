@@ -11,7 +11,7 @@ declare global {
     }
 }
 const reducer = combineReducers({
-    user: userReducer,//user key ma store gareko
+    user: userReducer,
     UI: uiReducer
 });
 const store = createStore(reducer, initialState, compose(applyMiddleware(...middleware), (window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()) as any));

@@ -14,7 +14,7 @@ const PrivateLayout: React.FC = (props:any)=>{
 
     useEffect(() => {
         getUser()
-    });
+    }, []);
 
 
     if (!user.authenticated){

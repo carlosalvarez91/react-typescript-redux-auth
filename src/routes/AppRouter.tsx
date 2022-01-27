@@ -13,7 +13,7 @@ const AppRouter: React.FC = (props:any) => {
 
     useEffect(() => {
         getUser()
-    });
+    }, []);
 
   return (
     <BrowserRouter>
